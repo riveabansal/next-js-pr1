@@ -1,6 +1,5 @@
 import Link from "next/link";
 
-import { auth } from "@/auth";
 import QuestionCard from "@/components/cards/QuestionCard";
 import HomeFilter from "@/components/filter/HomeFilter";
 import LocalSearch from "@/components/search/LocalSearch";
@@ -25,7 +24,7 @@ const questions = [
     upvotes: 10,
     answers: 5,
     views: 100,
-    createdAt: new Date("2026-01-05"),
+    createdAt: new Date(),
   },
   {
     _id: "2",
@@ -44,7 +43,7 @@ const questions = [
     upvotes: 10,
     answers: 5,
     views: 100,
-    createdAt: new Date("2025-09-01"),
+    createdAt: new Date("2021-09-01"),
   },
 ];
 
@@ -53,9 +52,6 @@ interface SearchParams {
 }
 
 const Home = async ({ searchParams }: SearchParams) => {
-  const session = await auth();
-
-  console.log("Session: ", session);
   const { query = "", filter = "" } = await searchParams;
 
   const filteredQuestions = questions.filter((question) => {
