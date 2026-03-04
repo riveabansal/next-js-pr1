@@ -7,7 +7,7 @@ import { getQuestion } from "@/lib/actions/question.action";
 import { formatNumber, getTimeStamp } from "@/lib/utils";
 import Link from "next/link";
 import { redirect } from "next/navigation";
-import View from "../view";
+import View from "@/app/(root)/questions/view";
 
 const QuestionDetails = async ({ params }: RouteParams) => {
   const { id } = await params;

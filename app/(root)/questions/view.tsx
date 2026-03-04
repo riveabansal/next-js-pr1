@@ -1,6 +1,6 @@
 "use client";
 
-import { toast } from "@/hooks/use-toast";
+import { toast } from "sonner";
 import { incrementViews } from "@/lib/actions/question.action";
 import { useEffect } from "react";
 
@@ -9,16 +9,9 @@ const View = ({ questionId }: { questionId: string }) => {
     const result = await incrementViews({ questionId });
 
     if (result.success) {
-      toast({
-        title: "Success",
-        description: "Views incremented",
-      });
+      toast.success("Views incremented");
     } else {
-      toast({
-        title: "Error",
-        description: result.error?.message,
-        variant: "destructive",
-      });
+      toast.error(result?.error?.message || "Failed to increment views");
     }
   };
 
