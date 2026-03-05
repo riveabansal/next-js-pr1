@@ -578,3 +578,10 @@ code {
     @apply bg-background text-foreground;
   }
 }
+
+/* NESTED CODE BLOCKS: Only apply grid to visible code blocks */
+[data-bright-mode="dark"]:not(html.light [data-bright-mode="dark"]),
+[data-bright-mode="light"]:not(:not(html.light [data-bright-mode="light"])) {
+  display: grid !important; /* Apply grid only if it's visible */
+  width: 100% !important;
+}
