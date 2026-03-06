@@ -1,12 +1,12 @@
 import UserCard from "@/components/cards/UserCard";
 import DataRenderer from "@/components/DataRenderer";
+import CommonFilter from "@/components/filter/CommonFilter";
+import Pagination from "@/components/Pagination";
 import LocalSearch from "@/components/search/LocalSearch";
+import { UserFilters } from "@/constants/filters";
 import ROUTES from "@/constants/routes";
 import { EMPTY_USERS } from "@/constants/states";
 import { getUsers } from "@/lib/actions/user.action";
-import CommonFilter from "@/components/filter/CommonFilter";
-import { UserFilters } from "@/constants/filters";
-import Pagination from "@/components/Pagination";
 
 const Community = async ({ searchParams }: RouteParams) => {
   const { page, pageSize, query, filter } = await searchParams;
@@ -18,7 +18,10 @@ const Community = async ({ searchParams }: RouteParams) => {
     filter,
   });
 
-  const { users, isNext } = data || {};
+  const { users, isNext } = (data || {}) as {
+    users: User[];
+    isNext: boolean;
+  };
 
   return (
     <div>
@@ -32,6 +35,7 @@ const Community = async ({ searchParams }: RouteParams) => {
           placeholder="There are some great devs here!"
           otherClasses="flex-1"
         />
+
         <CommonFilter filters={UserFilters} otherClasses="min-h-[56px] sm:min-w-[170px]" />
       </div>
 
@@ -43,7 +47,7 @@ const Community = async ({ searchParams }: RouteParams) => {
         render={(users) => (
           <div className="mt-12 flex flex-wrap gap-5">
             {users.map((user) => (
-              <UserCard key={user._id} {...user} />
+              <UserCard key={user.username} {...user} />
             ))}
           </div>
         )}
