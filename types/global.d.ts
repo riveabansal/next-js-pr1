@@ -41,8 +41,8 @@ type APIErrorResponse = NextResponse<ErrorResponse>;
 type APIResponse<T = null> = NextResponse<SuccessResponse<T> | ErrorResponse>;
 
 interface RouteParams {
-  params: Promise<Record<string, string>>;
-  searchParams: Promise<Record<string, string>>;
+  params: Record<string, string>;
+  searchParams: Record<string, string | undefined>;
 }
 
 interface PaginatedSearchParams {

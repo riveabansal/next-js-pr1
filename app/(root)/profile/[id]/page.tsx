@@ -17,9 +17,9 @@ import TagCard from "@/components/cards/TagCard";
 
 const Profile = async ({ params, searchParams }: RouteParams) => {
   // /12312313
-  const { id } = await params;
+  const { id } = params;
   // ?id=1&page=1&pageSize=10
-  const { page, pageSize } = await searchParams;
+  const { page, pageSize } = searchParams;
 
   if (!id) notFound();
 

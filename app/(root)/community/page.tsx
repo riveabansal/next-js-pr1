@@ -9,7 +9,7 @@ import { EMPTY_USERS } from "@/constants/states";
 import { getUsers } from "@/lib/actions/user.action";
 
 const Community = async ({ searchParams }: RouteParams) => {
-  const { page, pageSize, query, filter } = await searchParams;
+  const { page, pageSize, query, filter } = searchParams;
 
   const { success, data, error } = await getUsers({
     page: Number(page) || 1,

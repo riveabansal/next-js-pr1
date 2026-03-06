@@ -18,8 +18,8 @@ import SaveQuestion from "@/components/questions/SaveQuestion";
 import { hasSavedQuestion } from "@/lib/actions/collection.action";
 
 const QuestionDetails = async ({ params, searchParams }: RouteParams) => {
-  const { id } = await params;
-  const { page, pageSize, filter } = await searchParams;
+  const { id } = params;
+  const { page, pageSize, filter } = searchParams;
   const { success, data: question } = await getQuestion({ questionId: id });
 
   if (!success || !question) return redirect("/404");

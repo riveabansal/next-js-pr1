@@ -9,11 +9,11 @@ import { CollectionFilters } from "@/constants/filters";
 import Pagination from "@/components/Pagination";
 
 interface SearchParams {
-  searchParams: Promise<{ [key: string]: string }>;
+  searchParams: { [key: string]: string | undefined };
 }
 
 const Collections = async ({ searchParams }: SearchParams) => {
-  const { page, pageSize, query, filter } = await searchParams;
+  const { page, pageSize, query, filter } = searchParams;
 
   const { success, data, error } = await getSavedQuestions({
     page: Number(page) || 1,

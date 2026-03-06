@@ -13,11 +13,11 @@ import { HomePageFilters } from "@/constants/filters";
 import Pagination from "@/components/Pagination";
 
 interface SearchParams {
-  searchParams: Promise<{ [key: string]: string }>;
+  searchParams: { [key: string]: string | undefined };
 }
 
 const Home = async ({ searchParams }: SearchParams) => {
-  const { page, pageSize, query, filter } = await searchParams;
+  const { page, pageSize, query, filter } = searchParams;
 
   const { success, data, error } = await getQuestions({
     page: Number(page) || 1,

@@ -9,7 +9,7 @@ import { TagFilters } from "@/constants/filters";
 import Pagination from "@/components/Pagination";
 
 const Tags = async ({ searchParams }: RouteParams) => {
-  const { page, pageSize, query, filter } = await searchParams;
+  const { page, pageSize, query, filter } = searchParams;
   const { success, data, error } = await getTags({
     page: Number(page) || 1,
     pageSize: Number(pageSize) || 10,

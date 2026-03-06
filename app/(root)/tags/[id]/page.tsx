@@ -7,8 +7,8 @@ import { getTagQuestions } from "@/lib/actions/tag.action";
 import Pagination from "@/components/Pagination";
 
 const Page = async ({ params, searchParams }: RouteParams) => {
-  const { id } = await params;
-  const { page, pageSize, query } = await searchParams;
+  const { id } = params;
+  const { page, pageSize, query } = searchParams;
 
   const { success, data, error } = await getTagQuestions({
     tagId: id,
