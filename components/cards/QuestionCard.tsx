@@ -6,6 +6,7 @@ import { getTimeStamp } from "@/lib/utils";
 import TagCard from "./TagCard";
 import Metric from "../Metric";
 import EditDeleteAction from "../user/EditDeleteAction";
+import { headers } from "next/headers";
 
 interface Props {
   question: Question;
@@ -16,12 +17,15 @@ const QuestionCard = ({
   question: { _id, title, tags, author, createdAt, upvotes, answers, views },
   showActionBtns = false,
 }: Props) => {
+  headers(); // marks this component as dynamic-safe
+
+  const now = Date.now();
   return (
     <div className="card-wrapper rounded-[10px] p-9 sm:px-11">
       <div className="flex flex-col-reverse items-center justify-between gap-5 sm:flex-row">
         <div className="flex-1">
           <span className="subtle-regular text-dark400_light700 line-clamp-1 flex sm:hidden">
-            {getTimeStamp(createdAt)}
+            {getTimeStamp(new Date(createdAt), now)}
           </span>
 
           <Link href={ROUTES.QUESTION(_id)}>
@@ -43,7 +47,7 @@ const QuestionCard = ({
           imgUrl={author.image}
           alt={author.name}
           value={author.name}
-          title={`• asked ${getTimeStamp(createdAt)}`}
+          title={`• asked ${getTimeStamp(new Date(createdAt), now)}`}
           href={ROUTES.PROFILE(author._id)}
           textStyles="body-medium text-dark400_light700"
           isAuthor

@@ -9,6 +9,7 @@ import { Preview } from "../editor/Preview";
 import UserAvatar from "../UserAvatar";
 import Votes from "../votes/Votes";
 import EditDeleteAction from "../user/EditDeleteAction";
+import { headers } from "next/headers";
 
 interface Props extends Answer {
   containerClasses?: string;
@@ -28,6 +29,9 @@ const AnswerCard = ({
   showReadMore = false,
   showActionBtns = false,
 }: Props) => {
+  headers(); // marks this component as dynamic-safe
+
+  const now = Date.now();
   const hasVotedPromise = hasVoted({
     targetId: _id,
     targetType: "answer",
@@ -57,7 +61,7 @@ const AnswerCard = ({
 
             <p className="small-regular text-light400_light500 mt-0.5 ml-0.5 line-clamp-1">
               <span className="max-sm:hidden"> • </span>
-              answered {getTimeStamp(createdAt)}
+              answered {getTimeStamp(new Date(createdAt), now)}
             </p>
           </Link>
         </div>
