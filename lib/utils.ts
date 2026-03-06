@@ -39,10 +39,9 @@ export const getDeviconClassName = (techName: string) => {
   return techMap[normalizedTechName] ? `${techMap[normalizedTechName]} colored` : "devicon-devicon-plain";
 };
 
-export const getTimeStamp = (createdAt: Date) => {
+export const getTimeStamp = (createdAt: Date, now: number) => {
   const date = new Date(createdAt);
-  const now = new Date();
-  const secondsAgo = Math.floor((now.getTime() - date.getTime()) / 1000);
+  const secondsAgo = Math.floor((now - date.getTime()) / 1000);
 
   const units = [
     { label: "year", seconds: 31536000 },
@@ -60,6 +59,7 @@ export const getTimeStamp = (createdAt: Date) => {
       return `${interval} ${unit.label}${interval > 1 ? "s" : ""} ago`;
     }
   }
+
   return "just now";
 };
 

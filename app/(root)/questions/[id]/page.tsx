@@ -16,10 +16,14 @@ import { Suspense } from "react";
 import { hasVoted } from "@/lib/actions/vote.action";
 import SaveQuestion from "@/components/questions/SaveQuestion";
 import { hasSavedQuestion } from "@/lib/actions/collection.action";
+import { headers } from "next/headers";
 
 const QuestionDetails = async ({ params, searchParams }: RouteParams) => {
-  const { id } = params;
-  const { page, pageSize, filter } = searchParams;
+  headers(); // marks route dynamic for time usage
+
+  const now = Date.now();
+  const { id } = await params;
+  const { page, pageSize, filter } = await searchParams;
   const { success, data: question } = await getQuestion({ questionId: id });
 
   if (!success || !question) return redirect("/404");
@@ -89,7 +93,7 @@ const QuestionDetails = async ({ params, searchParams }: RouteParams) => {
         <Metric
           imgUrl="/icons/clock.svg"
           alt="clock icon"
-          value={` asked ${getTimeStamp(new Date(createdAt))}`}
+          value={` asked ${getTimeStamp(new Date(createdAt), now)}`}
           title=""
           textStyles="small-regular text-dark400_light700"
         />
