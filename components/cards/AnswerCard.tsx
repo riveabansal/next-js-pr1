@@ -29,7 +29,7 @@ const AnswerCard = ({
   showReadMore = false,
   showActionBtns = false,
 }: Props) => {
-  headers(); // marks this component as dynamic-safe
+  const requestHeaders = headers();
 
   const now = Date.now();
   const hasVotedPromise = hasVoted({

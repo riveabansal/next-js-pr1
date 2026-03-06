@@ -17,7 +17,7 @@ const QuestionCard = ({
   question: { _id, title, tags, author, createdAt, upvotes, answers, views },
   showActionBtns = false,
 }: Props) => {
-  headers(); // marks this component as dynamic-safe
+  const requestHeaders = headers();
 
   const now = Date.now();
   return (
