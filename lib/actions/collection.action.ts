@@ -109,6 +109,15 @@ export async function getSavedQuestions(
   }
 
   const userId = validationResult.session?.user?.id;
+  if (!userId) {
+    return {
+      success: true,
+      data: {
+        collection: [],
+        isNext: false,
+      },
+    };
+  }
   const { page = 1, pageSize = 10, query, filter } = params;
 
   const skip = (Number(page) - 1) * pageSize;
@@ -175,7 +184,7 @@ export async function getSavedQuestions(
 
     const questions = await Collection.aggregate(pipeline);
 
-    const isNext = totalCount.count > skip + questions.length;
+    const isNext = (totalCount?.count ?? 0) > skip + questions.length;
 
     return {
       success: true,
