@@ -1,15 +1,6 @@
-import { redirect } from "next/navigation";
-
-import { auth } from "@/auth";
 import QuestionForm from "@/components/forms/QuestionForm";
 
-export const dynamic = "force-dynamic";
-
-const AskQuestion = async () => {
-  const session = await auth();
-
-  if (!session) return redirect("/sign-in");
-
+const AskQuestion = () => {
   return (
     <>
       <h1 className="h1-bold text-dark100_light900">Ask a question</h1>
