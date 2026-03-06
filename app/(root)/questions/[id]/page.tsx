@@ -19,7 +19,7 @@ import { hasSavedQuestion } from "@/lib/actions/collection.action";
 import { headers } from "next/headers";
 
 const QuestionDetails = async ({ params, searchParams }: RouteParams) => {
-  headers(); // marks route dynamic for time usage
+  const requestHeaders = headers();
 
   const now = Date.now();
   const { id } = await params;
