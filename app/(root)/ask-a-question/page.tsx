@@ -1,8 +1,9 @@
 import { redirect } from "next/navigation";
-import React from "react";
 
 import { auth } from "@/auth";
 import QuestionForm from "@/components/forms/QuestionForm";
+
+export const dynamic = "force-dynamic";
 
 const AskQuestion = async () => {
   const session = await auth();
