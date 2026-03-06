@@ -5,7 +5,7 @@ import Metric from "@/components/Metric";
 import UserAvatar from "@/components/UserAvatar";
 import ROUTES from "@/constants/routes";
 import { getQuestion } from "@/lib/actions/question.action";
-import { formatNumber, getTimeStamp } from "@/lib/utils";
+import { formatNumber } from "@/lib/utils";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import View from "@/app/(root)/questions/view";
@@ -16,12 +16,9 @@ import { Suspense } from "react";
 import { hasVoted } from "@/lib/actions/vote.action";
 import SaveQuestion from "@/components/questions/SaveQuestion";
 import { hasSavedQuestion } from "@/lib/actions/collection.action";
-import { headers } from "next/headers";
+import TimeStamp from "@/components/Timestamp";
 
 const QuestionDetails = async ({ params, searchParams }: RouteParams) => {
-  const requestHeaders = headers();
-
-  const now = Date.now();
   const { id } = await params;
   const { page, pageSize, filter } = await searchParams;
   const { success, data: question } = await getQuestion({ questionId: id });
@@ -93,7 +90,7 @@ const QuestionDetails = async ({ params, searchParams }: RouteParams) => {
         <Metric
           imgUrl="/icons/clock.svg"
           alt="clock icon"
-          value={` asked ${getTimeStamp(new Date(createdAt), now)}`}
+          value={` asked ${(<TimeStamp createdAt={createdAt} />)}`}
           title=""
           textStyles="small-regular text-dark400_light700"
         />

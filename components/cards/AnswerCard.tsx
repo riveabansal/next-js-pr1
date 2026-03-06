@@ -3,13 +3,13 @@ import { Suspense } from "react";
 
 import ROUTES from "@/constants/routes";
 import { hasVoted } from "@/lib/actions/vote.action";
-import { cn, getTimeStamp } from "@/lib/utils";
+import { cn } from "@/lib/utils";
 
 import { Preview } from "../editor/Preview";
 import UserAvatar from "../UserAvatar";
 import Votes from "../votes/Votes";
 import EditDeleteAction from "../user/EditDeleteAction";
-import { headers } from "next/headers";
+import TimeStamp from "../Timestamp";
 
 interface Props extends Answer {
   containerClasses?: string;
@@ -29,9 +29,6 @@ const AnswerCard = ({
   showReadMore = false,
   showActionBtns = false,
 }: Props) => {
-  const requestHeaders = headers();
-
-  const now = Date.now();
   const hasVotedPromise = hasVoted({
     targetId: _id,
     targetType: "answer",
@@ -61,7 +58,7 @@ const AnswerCard = ({
 
             <p className="small-regular text-light400_light500 mt-0.5 ml-0.5 line-clamp-1">
               <span className="max-sm:hidden"> • </span>
-              answered {getTimeStamp(new Date(createdAt), now)}
+              answered {<TimeStamp createdAt={createdAt} />}
             </p>
           </Link>
         </div>

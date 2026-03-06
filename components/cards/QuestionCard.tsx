@@ -1,13 +1,11 @@
 import Link from "next/link";
 
 import ROUTES from "@/constants/routes";
-import { getTimeStamp } from "@/lib/utils";
 
 import TagCard from "./TagCard";
 import Metric from "../Metric";
 import EditDeleteAction from "../user/EditDeleteAction";
-import { headers } from "next/headers";
-
+import TimeStamp from "../Timestamp";
 interface Props {
   question: Question;
   showActionBtns?: boolean;
@@ -17,15 +15,12 @@ const QuestionCard = ({
   question: { _id, title, tags, author, createdAt, upvotes, answers, views },
   showActionBtns = false,
 }: Props) => {
-  const requestHeaders = headers();
-
-  const now = Date.now();
   return (
     <div className="card-wrapper rounded-[10px] p-9 sm:px-11">
       <div className="flex flex-col-reverse items-center justify-between gap-5 sm:flex-row">
         <div className="flex-1">
           <span className="subtle-regular text-dark400_light700 line-clamp-1 flex sm:hidden">
-            {getTimeStamp(new Date(createdAt), now)}
+            {<TimeStamp createdAt={createdAt} />}
           </span>
 
           <Link href={ROUTES.QUESTION(_id)}>
@@ -47,7 +42,7 @@ const QuestionCard = ({
           imgUrl={author.image}
           alt={author.name}
           value={author.name}
-          title={`• asked ${getTimeStamp(new Date(createdAt), now)}`}
+          title={`• asked ${(<TimeStamp createdAt={createdAt} />)}`}
           href={ROUTES.PROFILE(author._id)}
           textStyles="body-medium text-dark400_light700"
           isAuthor
